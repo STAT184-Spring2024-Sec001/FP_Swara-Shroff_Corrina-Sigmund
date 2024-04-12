@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(ggplot2)
 library(kableExtra)
 library(janitor)
+load(heart_attack_prediction_dataset.2)
 library(dplyr)
 
 ```
@@ -24,9 +25,9 @@ When you click the **Knit** button a document will be generated that includes bo
 ## Stress Level v. Gender
 Stress levels -- scale of 1 to 10
 
-```{r exercise v. stress level}
+```{r gender v. stress level}
 
-heart_attack_pred_data<-heart_attack_prediction_dataset.2  %>% 
+stress_gender_data<-heart_attack_prediction_dataset.2  %>% 
   select(Stress.Level, Sex)
   
   ggplot(heart_attack_pred_data) + 
