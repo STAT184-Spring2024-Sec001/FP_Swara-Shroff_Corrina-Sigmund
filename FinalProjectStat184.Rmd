@@ -2,7 +2,11 @@
 title: "Final Project"
 author: "Corrina Sigmund and Swara Shroff"
 date: "2024-04-12"
-output: html_document
+output: 
+  pdf_document: default
+  html_document:
+    df_print: paged
+    code_folding: hide
 ---
 
 ```{r setup, include=FALSE}
@@ -10,7 +14,6 @@ knitr::opts_chunk$set(echo = TRUE)
 library(ggplot2)
 library(kableExtra)
 library(janitor)
-load(heart_attack_prediction_dataset.2)
 library(dplyr)
 
 ```
@@ -25,9 +28,9 @@ When you click the **Knit** button a document will be generated that includes bo
 ## Stress Level v. Gender
 Stress levels -- scale of 1 to 10
 
-```{r gender v. stress level}
+```{r stress level}
 
-stress_gender_data<-heart_attack_prediction_dataset.2  %>% 
+heart_attack_pred_data<-heart_attack_prediction_dataset.2  %>% 
   select(Stress.Level, Sex)
   
   ggplot(heart_attack_pred_data) + 
@@ -45,12 +48,23 @@ stress_gender_data<-heart_attack_prediction_dataset.2  %>%
 
 ```
 
-## 
+## Cholesterol vs Triglycerides in Patients at Risk of Heart Attack
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r cholesterol vs triglyceride levels}
+heart_attack_pred_data<-heart_attack_prediction_dataset.2  %>% 
+  filter(Heart.Attack.Risk != 0)
+  
+  ggplot(heart_attack_pred_data) + 
+  aes (x = Cholesterol, y = Triglycerides, color = Sex) +
+  geom_point() +  
+  scale_color_brewer(palette = "Set1") +  # Choose color palette
+  labs(x = "Cholesterol Level", y = "Triglycerides Level", color = "Sex") +  # Add axis labels and legend title
+  ggtitle("Level of Cholesterol vs Triglycerides in Patients at Risk of Heart Attack") +  # Add plot title
+  theme_minimal() # Choose a theme
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
-## Physical Activity Days per Week V. Gender
+## Physical Activity Days per Week V. Sex
+
+```
