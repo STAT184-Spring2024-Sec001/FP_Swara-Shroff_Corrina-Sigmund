@@ -57,7 +57,7 @@ heart_attack_pred_data<-heart_attack_prediction_dataset.2  %>%
   ggplot(heart_attack_pred_data) + 
   aes (x = Cholesterol, y = Triglycerides, color = Sex) +
   geom_point() +  
-  scale_color_brewer(palette = "Set1") +  # Choose color palette
+  scale_color_brewer(palette = "Set2") +  # Choose color palette
   labs(x = "Cholesterol Level", y = "Triglycerides Level", color = "Sex") +  # Add axis labels and legend title
   ggtitle("Level of Cholesterol vs Triglycerides in Patients at Risk of Heart Attack") +  # Add plot title
   theme_minimal() # Choose a theme
