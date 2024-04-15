@@ -66,5 +66,16 @@ heart_attack_pred_data<-heart_attack_prediction_dataset.2  %>%
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
 ## Physical Activity Days per Week V. Sex
+```{r number of physical activity days vs sex}
+heart_attack_pred_data<-heart_attack_prediction_dataset.2  %>% 
+  select(Physical.Activity.Days.Per.Week, Sex)
+  
+  ggplot(heart_attack_pred_data) +
+  aes(x = factor(Physical.Activity.Days.Per.Week), fill = Sex) +  # Convert to factor for discrete data
+  geom_bar(position = "dodge", stat = "count") +  # Create a bar plot with dodged bars
+  scale_fill_brewer(palette = "Set1") +  # Choose color palette
+  labs(x = "Physical Activity Days Per Week", y = "Number of Individuals", fill = "Sex") +  # Add axis labels and legend title
+  ggtitle("Physical Activity Days Per Week for Each Sex") +  # Add plot title
+  theme_minimal()  # Choose a theme
 
 ```
