@@ -66,14 +66,14 @@ Note that the `echo = FALSE` parameter was added to the code chunk to prevent pr
 ## Diet V. Sex
 ```{r number of physical activity days vs sex}
 heart_attack_pred_data<-heart_attack_prediction_dataset.2  %>% 
-  select(Diet, Sex)
+  select(Heart.Rate, Sex)
   
   ggplot(heart_attack_pred_data) +
-  aes(x = factor(Diet), fill = Sex) +  # Convert to factor for discrete data
+  aes(x = factor(Heart.Rate), fill = Sex) +  # Convert to factor for discrete data
   geom_bar(position = "dodge", stat = "count") +  # Create a bar plot with dodged bars
   scale_fill_brewer(palette = "Set1") +  # Choose color palette
-  labs(x = "Diet", y = "Number of Individuals", fill = "Sex") +  # Add axis labels and legend title
-  ggtitle("Diet Type for Each Sex") +  # Add plot title
+  labs(x = "Heart Rate", y = "Number of Individuals", fill = "Sex") +  # Add axis labels and legend title
+  ggtitle("Heart Rate for Each Sex") +  # Add plot title
   theme_minimal()  # Choose a theme
 
 ```
