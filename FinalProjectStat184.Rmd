@@ -19,9 +19,13 @@ library(dplyr)
 heart_attack_pred_data <- read.csv("https://drive.google.com/uc?export=download&id=1HrZR4RsUUkYLhxkNhXNuoU8uqoQrLBbh")
 
 ```
-#Research Question
+# Research Question
 
 ## (add the question)
+
+# Data Source and Attributes Description
+
+## Our dataset is called the Heart Attack Prediction Data Set and we got this dataset from Kaggle. It is already tidy and contains 26 attributes and 8,764 cases. A case is represented by a patient. Some of the attributes it inlcudes is Heart Rate, Sex, Stress Levels, Heart Attack Risk for Patients, BMI, Physical Activity Days per Week, and more all taken from the dataset. Our goal is to understand (what are we researching). To do this, we plan to use the ggplot2 library to make a various visuals and tables. We will also utilized knitr, KableExtra, janitor, and dplyr.
 
 # Stress Level vs. Sex in Patients At Risk and Not at Risk for Heart Attack
 
@@ -77,7 +81,9 @@ heart_attack_pred_data  %>%
 ### Through the data that we obtained, it is clear to see that all female patients, no matter their risk for a heart attack, have an average stress level of six and all male patients have an average stress level of five. Therefore, stress level is not a main factor in heart attacks in patients.
 
 
-## Average Risk for Heart Attack by Age and Sex
+# Average Risk for Heart Attack by Age and Sex
+
+### add description about what the data is going to show and why we made this graph
 
 ```{r average heart attack risk by age and sex}
 hr <- heart_attack_pred_data %>%
@@ -90,6 +96,15 @@ ggplot(hr, aes(x = Age, y = avg_heart_attack_risk, fill = Sex)) +
   labs(x = "Age", y = "Average Heart Attack Risk", title = "Average Heart Attack Risk by Age and Sex") +
   scale_fill_manual(values = c("maroon", "#4169e1"))
 ```
+## Average Risk for Heart Attack by Age and Sex Visualisation Description
+
+### describe what the visualisation shows
+
+## Conclusions for Average Risk for Heart Attack by Age and Sex
+
+### what does this mean and how does it relate to our research question
+
+
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
@@ -108,7 +123,9 @@ heart_attack_pred_data  %>%
 
 ```
 
-## Physical Activity Days per Week V. BMI Frequency Table
+# Physical Activity Days per Week V. BMI Frequency Table
+
+### add description about what the table is going to show and why we made this table
 
 ```{r physical activty v. BMI}
 SummaryTableofBMI <- heart_attack_pred_data %>%
@@ -133,3 +150,13 @@ SummaryTableofBMI %>%
   kable_styling(full_width = FALSE, stripe_color = "pink")
 
 ```
+
+
+## Physical Activity Days per Week V. BMI Frequency Table Visualisation Description
+
+### describe what the visualisation shows
+
+## Conclusions for Physical Activity Days per Week V. BMI Frequency Table
+
+### what does this mean and how does it relate to our research question
+
