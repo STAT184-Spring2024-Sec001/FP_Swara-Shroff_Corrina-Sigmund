@@ -27,7 +27,7 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 
-## Stress Level v. Gender
+## Stress Level v. Sex in Patients At Risk and Not at Risk for Heart Attack
 Stress levels -- scale of 1 to 10
 
 ```{r stress level in patients at risk for heart attack}
@@ -57,7 +57,7 @@ heart_attack_pred_data  %>%
   scale_x_continuous(breaks = seq(0, max(heart_attack_pred_data$Stress.Level), by = 1)) #Makes x-axis count by 1
 ```
 
-## Cholesterol vs Triglycerides in Patients at Risk of Heart Attack
+## Average Risk for Heart Attack by Age and Sex
 
 ```{r average heart attack risk by age and sex}
 hr <- heart_attack_pred_data %>%
@@ -73,8 +73,8 @@ ggplot(hr, aes(x = Age, y = avg_heart_attack_risk, fill = Sex)) +
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
-## Diet V. Sex
-```{r number of physical activity days vs sex}
+## Heart Rate vs. Sex
+```{r heart rate vs sex}
 heart_attack_pred_data  %>% 
   select(Heart.Rate, Sex)
   
