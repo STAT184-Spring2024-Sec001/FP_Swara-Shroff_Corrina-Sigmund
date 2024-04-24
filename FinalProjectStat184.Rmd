@@ -19,16 +19,18 @@ library(dplyr)
 heart_attack_pred_data <- read.csv("https://drive.google.com/uc?export=download&id=1HrZR4RsUUkYLhxkNhXNuoU8uqoQrLBbh")
 
 ```
+#Research Question
 
-## R Markdown
+## (add the question)
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+# Stress Level vs. Sex in Patients At Risk and Not at Risk for Heart Attack
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+### Using two boxplots, we want to compare the average stress levels on a scale of one to ten in male and female patients at risk and not at risk for a heart attack. By separating the patients into these two categories, we are able to consider whether or not stress level plays an important role in leading to a heart attack within patients.
 
 
-## Stress Level v. Sex in Patients At Risk and Not at Risk for Heart Attack
-Stress levels -- scale of 1 to 10
+## Stress Level vs. Sex for Patients At Risk for a Heart Attack
+
+### This graph shows the average stress levels for male and female patients at risk for a heart attack using a box plot. The stress levels of patients was measured on a scale of one to ten.
 
 ```{r stress level in patients at risk for heart attack}
 heart_attack_pred_data  %>% 
@@ -43,6 +45,15 @@ heart_attack_pred_data  %>%
   theme_minimal() + # Choose a theme
   scale_x_continuous(breaks = seq(0, max(heart_attack_pred_data$Stress.Level), by = 1)) #Makes x-axis count by 1
 ```
+## Stress Level vs. Sex for Patients At Risk for a Heart Attack Visualisation Description
+
+### Through this boxplot, we can see that the average stress level in female patients at risk for a heart attack is a six out of ten. The average stress level in male patients at risk for a heart attack is a five out of ten. According to this data, the average stress levels for patients at risk for a heart attack is higher for females by one point.
+
+
+## Stress Level vs. Sex for Patients Not At Risk for a Heart Attack
+
+### This graph shows the average stress levels for male and female patients not at risk for a heart attack using a box plot. The stress levels of patients was measured on a scale of one to ten.
+
 ```{r stress level in patients not at risk for heart attack}
 heart_attack_pred_data  %>% 
   select(Stress.Level, Sex, Heart.Attack.Risk) %>% 
@@ -56,6 +67,15 @@ heart_attack_pred_data  %>%
   theme_minimal() + # Choose a theme
   scale_x_continuous(breaks = seq(0, max(heart_attack_pred_data$Stress.Level), by = 1)) #Makes x-axis count by 1
 ```
+## Stress Level vs. Sex for Patients Not At Risk for a Heart Attack Visualisation Description
+
+### Through this boxplot, we can see that the average stress level in female patients not at risk for a heart attack is a six out of ten. The average stress level in male patients not at risk for a heart attack is a five out of ten. According to this data, the average stress levels for patients not at risk for a heart attack is higher for females by one point.
+
+
+## Conclusions for Stress Level vs. Sex in Patients At Risk and Not at Risk for Heart Attack
+
+### Through the data that we obtained, it is clear to see that all female patients, no matter their risk for a heart attack, have an average stress level of six and all male patients have an average stress level of five. Therefore, stress level is not a main factor in heart attacks in patients.
+
 
 ## Average Risk for Heart Attack by Age and Sex
 
