@@ -17,134 +17,173 @@ library(janitor)
 library(dplyr)
 
 heart_attack_pred_data <- read.csv("https://drive.google.com/uc?export=download&id=1HrZR4RsUUkYLhxkNhXNuoU8uqoQrLBbh")
+glimpse(heart_attack_pred_data)
 
 ```
 # Research Question
 
-### (add the question)
+### How do the factors such as stress level, income, exercise hours per week impact a patients risk of getting a heart attack?
 
 # Data Source and Attributes Description
 
-### Our dataset is called the Heart Attack Prediction Data Set and we got this dataset from Kaggle. It is already tidy and contains 26 attributes and 8,764 cases. A case is represented by a patient. Some of the attributes it inlcudes is Heart Rate, Sex, Stress Levels, Heart Attack Risk for Patients, BMI, Physical Activity Days per Week, and more all taken from the dataset. Our goal is to understand (what are we researching). To do this, we plan to use the ggplot2 library to make a various visuals and tables. We will also utilized knitr, KableExtra, janitor, and dplyr.
+#### Our dataset is called the Heart Attack Prediction Data Set and we got this dataset from Kaggle. It is already tidy and contains 26 attributes and 8,764 cases. A case is represented by a patient. Some of the attributes it inlcudes is Heart Rate, Sex, Stress Levels, Heart Attack Risk for Patients, BMI, Physical Activity Days per Week, and more all taken from the dataset. Our goal is to understand (what are we researching). To do this, we plan to use the ggplot2 library to make a various visuals and tables. We will also utilized knitr, KableExtra, janitor, and dplyr.
 
 # Stress Level vs. Sex in Patients At Risk and Not at Risk for Heart Attack
 
-### Using two boxplots, we want to compare the average stress levels on a scale of one to ten in male and female patients at risk and not at risk for a heart attack. By separating the patients into these two categories, we are able to consider whether or not stress level plays an important role in leading to a heart attack within patients.
+#### Using two boxplots, we want to compare the average stress levels on a scale of one to ten in male and female patients at risk and not at risk for a heart attack. By separating the patients into these two categories, we are able to consider whether or not stress level plays an important role in leading to a heart attack within patients.
 
 
 ## Stress Level vs. Sex for Patients At Risk for a Heart Attack
 
-### This graph shows the average stress levels for male and female patients at risk for a heart attack using a box plot. The stress levels of patients was measured on a scale of one to ten.
+#### This graph shows the average stress levels for male and female patients at risk for a heart attack using a box plot. The stress levels of patients was measured on a scale of one to ten.
 
 ```{r stress level in patients at risk for heart attack}
 heart_attack_pred_data  %>% 
   select(Stress.Level, Sex, Heart.Attack.Risk) %>% 
-  filter(Heart.Attack.Risk != 0) #at risk for heart attack
-  ggplot(heart_attack_pred_data) + 
+  filter(Heart.Attack.Risk != 0) %>% #at risk for heart attack
+  ggplot() + 
   aes (x = Stress.Level, y = Sex, fill = Sex) +
   geom_boxplot() +  
   scale_fill_manual(values = c("salmon", "turquoise")) +  # Choose color palette
   labs(x = "Stress Level", y = "Sex", fill = "Sex") +  # Add axis labels and legend title
   ggtitle("Stress Level for each Sex") +  # Add plot title
   theme_minimal() + # Choose a theme
-  scale_x_continuous(breaks = seq(0, max(heart_attack_pred_data$Stress.Level), by = 1)) #Makes x-axis count by 1
+  scale_x_continuous(breaks = seq(0, max(heart_attack_pred_data$Stress.Level), by = 1)) + #Makes x-axis count by 1
+  theme(
+    axis.text = element_text(size = 12),  # Adjust axis text size
+    axis.title = element_text(size = 14),  # Adjust axis label size
+    legend.title = element_text(size = 14),  # Adjust legend title size
+    legend.text = element_text(size = 12),  # Adjust legend text size
+    plot.title = element_text(size = 16)  # Adjust plot title size
+  )
 ```
 
 ## Stress Level vs. Sex for Patients At Risk for a Heart Attack Visualisation Description
 
-### Through this boxplot, we can see that the average stress level in female patients at risk for a heart attack is a six out of ten. The average stress level in male patients at risk for a heart attack is a five out of ten. According to this data, the average stress levels for patients at risk for a heart attack is higher for females by one point.
+#### Through this boxplot, we can see that the average stress level in female patients at risk for a heart attack is a six out of ten. The average stress level in male patients at risk for a heart attack is a five out of ten. According to this data, the average stress levels for patients at risk for a heart attack is higher for females by one point.
 
 
 ## Stress Level vs. Sex for Patients Not At Risk for a Heart Attack
 
-### This graph shows the average stress levels for male and female patients not at risk for a heart attack using a box plot. The stress levels of patients was measured on a scale of one to ten.
+#### This graph shows the average stress levels for male and female patients not at risk for a heart attack using a box plot. The stress levels of patients was measured on a scale of one to ten.
 
 ```{r stress level in patients not at risk for heart attack}
 heart_attack_pred_data  %>% 
   select(Stress.Level, Sex, Heart.Attack.Risk) %>% 
-  filter(Heart.Attack.Risk != 1) #not at risk for heart attack
-  ggplot(heart_attack_pred_data) + 
+  filter(Heart.Attack.Risk != 1) %>% #not at risk for heart attack
+  ggplot() + 
   aes (x = Stress.Level, y = Sex, fill = Sex) +
   geom_boxplot() +  
   scale_fill_manual(values = c("#F4C2C2", "#89CFF0")) +  # Choose color palette
   labs(x = "Stress Level", y = "Sex", fill = "Sex") +  # Add axis labels and legend title
   ggtitle("Stress Level for each Sex") +  # Add plot title
   theme_minimal() + # Choose a theme
-  scale_x_continuous(breaks = seq(0, max(heart_attack_pred_data$Stress.Level), by = 1)) #Makes x-axis count by 1
+  scale_x_continuous(breaks = seq(0, max(heart_attack_pred_data$Stress.Level), by = 1)) + #Makes x-axis count by 1
+  theme(
+    axis.text = element_text(size = 12),  # Adjust axis text size
+    axis.title = element_text(size = 14),  # Adjust axis label size
+    legend.title = element_text(size = 14),  # Adjust legend title size
+    legend.text = element_text(size = 12),  # Adjust legend text size
+    plot.title = element_text(size = 16)  # Adjust plot title size
+  )
 ```
 
 ## Stress Level vs. Sex for Patients Not At Risk for a Heart Attack Visualisation Description
 
-### Through this boxplot, we can see that the average stress level in female patients not at risk for a heart attack is a six out of ten. The average stress level in male patients not at risk for a heart attack is a five out of ten. According to this data, the average stress levels for patients not at risk for a heart attack is higher for females by one point.
+#### Through this boxplot, we can see that the average stress level in female patients not at risk for a heart attack is a six out of ten. The average stress level in male patients not at risk for a heart attack is a five out of ten. According to this data, the average stress levels for patients not at risk for a heart attack is higher for females by one point.
 
 
 ## Conclusions for Stress Level vs. Sex in Patients At Risk and Not at Risk for Heart Attack
 
-### Through the data that we obtained, it is clear to see that all female patients, no matter their risk for a heart attack, have an average stress level of six and all male patients have an average stress level of five. Therefore, stress level is not a main factor in heart attacks in patients.
+#### Through the data that we obtained, it is clear to see that all female patients, no matter their risk for a heart attack, have an average stress level of six and all male patients have an average stress level of five. Therefore, stress level is not a main factor in heart attacks in patients.
 
 
 # Average Risk for Heart Attack by Age and Sex
 
-### add description about what the data is going to show and why we made this graph
+#### add description about what the data is going to show and why we made this graph
 
 ```{r average heart attack risk by age and sex}
 hr <- heart_attack_pred_data %>%
   group_by(Age, Sex) %>%
   summarise(avg_heart_attack_risk = mean(Heart.Attack.Risk))
 
-# Create the barplot
 ggplot(hr, aes(x = Age, y = avg_heart_attack_risk, fill = Sex)) +
-  geom_bar(stat = "identity", position = "dodge") +
+  geom_bar(stat = "identity", position = position_dodge(width = 0.8), linewidth = 1.2) + # Adjust position and add color and size
   labs(x = "Age", y = "Average Heart Attack Risk", title = "Average Heart Attack Risk by Age and Sex") +
-  scale_fill_manual(values = c("maroon", "#4169e1"))
+  scale_fill_manual(values = c("maroon", "#4169e1")) + 
+  scale_x_continuous(breaks = seq(20, 90, by = 5)) +  # Add more breaks at intervals of 5
+  theme(
+    text = element_text(size = 14),  # Increase font size for all text
+    panel.grid.minor.x = element_blank()  # Remove minor vertical grid lines
+  )
 ```
 
 ## Average Risk for Heart Attack by Age and Sex Visualisation Description
 
-### describe what the visualisation shows
+#### describe what the visualisation shows
 
 ## Conclusions for Average Risk for Heart Attack by Age and Sex
 
-### what does this mean and how does it relate to our research question
+#### what does this mean and how does it relate to our research question
 
 
 
-## Heart Rate vs. Sex
-```{r heart rate vs sex}
-heart_attack_pred_data  %>% 
-  select(Heart.Rate, Sex)
-  
-  ggplot(heart_attack_pred_data) +
-  aes(x = factor(Heart.Rate), fill = Sex) +  # Convert to factor for discrete data
-  geom_bar(position = "dodge", stat = "count") +  # Create a bar plot with dodged bars
-  scale_fill_brewer(palette = "Set1") +  # Choose color palette
-  labs(x = "Heart Rate", y = "Number of Individuals", fill = "Sex") +  # Add axis labels and legend title
-  ggtitle("Heart Rate for Each Sex") +  # Add plot title
-  theme_minimal()  # Choose a theme
+## Sleep Hours Per Day for Patients At Risk and Not at Risk for Heart Attack
+```{r income levels in patients not at risk for heart attack}
+heart_attack_pred_data1 <- heart_attack_pred_data  %>% 
+  select(Sleep.Hours.Per.Day, Income, Heart.Attack.Risk) %>% 
+  filter(Heart.Attack.Risk != 0)
+         
+categorize_income <- function(incomes) {
+  if (incomes <= 50000) {
+    return("$0 - $50,000")
+  } else if (incomes > 50001 & incomes <= 100000) {
+    return("$50,001 - $100,000") 
+  } else if (incomes > 100001 & incomes <= 150000){
+    return("$100,001 - $150,000")
+  } else if (incomes > 150001 & incomes <= 200000){
+    return("$150,001 - 200,000")
+  } else if (incomes > 200001 & incomes <= 250000){
+    return("$200,001 - 250,000")
+  } else {
+    return("More than $250,001")
+  }
+}
+
+heart_attack_pred_data1$Income_Category <- sapply(heart_attack_pred_data1$Income, categorize_income)
+
+ggplot(heart_attack_pred_data1, aes(x = "", fill = Income_Category)) +
+  geom_bar(stat = "count", width = 1) +
+  coord_polar("y") +
+  labs(title = "Income of Patients At Risk",
+       fill = "Income Category") +
+  theme_minimal() +
+  theme(legend.position = "right")
 
 ```
 
-# Physical Activity Days per Week V. BMI Frequency Table
 
-### add description about what the table is going to show and why we made this table
+# Exercise Hours Per Week V. Stress Level Frequency Table
+
+#### add description about what the table is going to show and why we made this table
 
 ```{r physical activty v. BMI}
-SummaryTableofBMI <- heart_attack_pred_data %>%
-  group_by(Physical.Activity.Days.Per.Week) %>% #groups the all BMI cases with the physical acivity per week attribute 
+SummaryTableofExerciseHoursPerWeek <- heart_attack_pred_data %>%
+  group_by(Stress.Level) %>% #groups the all exercise hours per week cases with the stress level attribute 
   summarise(
   count = n(), #finds total case count
-  min = min(BMI, na.rm = TRUE), #finds min value
-  quintile1 = quantile(BMI, probs = 0.20, na.rm = TRUE), #get 20th percentile
-  quintile2 = quantile(BMI, probs = 0.40 , na.rm = TRUE), #gets 40th percentile
-  median = median(BMI, na.rm = TRUE), #finds median
-  quintile3 = quantile(BMI, probs = 0.60, na.rm = TRUE), #gets 60th percentile
-  quintile4 = quantile(BMI, probs = 0.80, na.rm = TRUE), #gets 80th percentile
-  max = max(BMI, na.rm = TRUE), #finds max
-  mean = mean(BMI, na.rm = TRUE), #finds mean
-  StandardDeviation = sd(BMI, na.rm = TRUE) #finds sd
+  min = min(Exercise.Hours.Per.Week, na.rm = TRUE), #finds min value
+  quintile1 = quantile(Exercise.Hours.Per.Week, probs = 0.20, na.rm = TRUE), #get 20th percentile
+  quintile2 = quantile(Exercise.Hours.Per.Week, probs = 0.40 , na.rm = TRUE), #gets 40th percentile
+  median = median(Exercise.Hours.Per.Week, na.rm = TRUE), #finds median
+  quintile3 = quantile(Exercise.Hours.Per.Week, probs = 0.60, na.rm = TRUE), #gets 60th percentile
+  quintile4 = quantile(Exercise.Hours.Per.Week, probs = 0.80, na.rm = TRUE), #gets 80th percentile
+  max = max(Exercise.Hours.Per.Week, na.rm = TRUE), #finds max
+  mean = mean(Exercise.Hours.Per.Week, na.rm = TRUE), #finds mean
+  StandardDeviation = sd(Exercise.Hours.Per.Week, na.rm = TRUE) #finds sd
 )
 #polish
-SummaryTableofBMI %>%
+SummaryTableofExerciseHoursPerWeek %>%
   kable(
     align = c("l", rep("c", 10))      #left indents the first column and centers the rest of the columns
   ) %>% 
@@ -154,11 +193,11 @@ SummaryTableofBMI %>%
 
 
 
-## Physical Activity Days per Week V. BMI Frequency Table Visualisation Description
+## Exercise Hours Per Week V. Stress Level Frequency Table Visualisation Description
 
-### describe what the visualisation shows
+#### describe what the visualisation shows
 
-## Conclusions for Physical Activity Days per Week V. BMI Frequency Table
+## Conclusions for Exercise Hours Per Week V. Stress Level Frequency Table
 
-### what does this mean and how does it relate to our research question
+#### what does this mean and how does it relate to our research question
 
