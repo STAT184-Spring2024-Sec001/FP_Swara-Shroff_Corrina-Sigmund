@@ -195,9 +195,17 @@ SummaryTableofExerciseHoursPerWeek %>%
 
 ## Exercise Hours Per Week V. Stress Level Frequency Table Visualisation Description
 
-#### describe what the visualisation shows
+####  This visual shows the minimum, median, maximum, quintiles, mean, and standard deviation of exercise hours per week for each stress level group (scale 1-10). Our intention with creating this table was to see if people who are stressed more exercise more in order to get rid of this stress. From looking at the table the mean value for each stress level group is around 10 exercise hours per week, indicating to us that how stressed a person is does not necessarily tell us how much they exercise. Interestingly enough the stress level group with the most mean exercise hours per week, 10.113656, was stress level 5. From the table we are also told the lowest minimum value for exercise hours per week is 0.0024423 which is from stress level group 4. The highest maximum value for exercise hours per week is 19.99871 coming from stress level group 8. This information tells us that just because someone is stressed does not mean they exercise more/less as each group has around the same mean number of hours, the lowest amount of hours does not come from stress level 1 (least stressed), and the highest amount of hours does not come from group level 10 (most stressed. 
 
 ## Conclusions for Exercise Hours Per Week V. Stress Level Frequency Table
 
-#### what does this mean and how does it relate to our research question
+#### Relating this back to our research question stress is a risk factor for having a heart attack and exercise is a way to combat stress. From our table we see that all the stress level groups have a similar mean number of exercise per week, around 10 hours, meaning there are some people in all of the groups who are exercising less than 10 hours. It may be a good suggestion to tell those with higher streess levels to make sure they are exercising, in order to reduce their stress and therefore hopefully reduce their risk of a heart attack. There are a lot of risk factors for a heart attack but if one is able to reduce their stress levels through exercise it will have many benefits such as a healthier heart and lifestyle. 
+
+
+
+
+
+
+
+
 
