@@ -28,37 +28,6 @@ glimpse(heart_attack_pred_data)
 
 #### Our dataset is called the Heart Attack Prediction Data Set and we got this dataset from Kaggle. It is already tidy and contains 26 attributes and 8,764 cases. A case is represented by a patient. Some of the attributes it inlcudes is Heart Rate, Sex, Stress Levels, Heart Attack Risk for Patients, BMI, Physical Activity Days per Week, and more all taken from the dataset. Our goal is to understand (what are we researching). To do this, we plan to use the ggplot2 library to make a various visuals and tables. We will also utilized knitr, KableExtra, janitor, and dplyr.
 
-
-# Average Risk for Heart Attack by Age and Sex
-
-#### Understanding how age and sex influence the risk of heart attack is crucial for identifying vulnerable populations. By visualizing the average heart attack risk across different age groups and sexes, we can gain insights into the demographic patterns of heart attack susceptibility.
-
-```{r average heart attack risk by age and sex}
-hr <- heart_attack_pred_data %>%
-  group_by(Age, Sex) %>%
-  summarise(avg_heart_attack_risk = mean(Heart.Attack.Risk))
-
-ggplot(hr, aes(x = Age, y = avg_heart_attack_risk, fill = Sex)) +
-  geom_bar(stat = "identity", position = position_dodge(width = 0.8), linewidth = 1.2) + # Adjust position and add color and size
-  labs(x = "Age", y = "Average Heart Attack Risk", title = "Average Heart Attack Risk by Age and Sex") +
-  scale_fill_manual(values = c("maroon", "#4169e1")) + 
-  scale_x_continuous(breaks = seq(20, 90, by = 5)) +  # Add more breaks at intervals of 5
-  theme(
-    text = element_text(size = 14),  # Increase font size for all text
-    panel.grid.minor.x = element_blank()  # Remove minor vertical grid lines
-  )
-```
-
-## Average Risk for Heart Attack by Age and Sex Visualisation Description
-
-#### This visualization displays the average risk of heart attack categorized by age and sex. Each bar represents the average risk for a specific age group, with bars grouped by sex. The x-axis represents age, the y-axis represents the average heart attack risk, and the bars are colored by sex.
-
-## Conclusions for Average Risk for Heart Attack by Age and Sex
-
-#### The visualization shows that there is a trend of increasing average heart attack risk with age for both males and females. It appears that males tend to have a slightly higher average risk compared to females across different age groups. This suggests that age and sex may be significant factors contributing to the risk of heart attack. This observation supports our research question, indicating that factors such as age and sex are important considerations in understanding the risk of heart attack among patients.
-
-
-
 # Stress Level vs. Sex in Patients At Risk and Not at Risk for Heart Attack
 
 #### Using two boxplots, we want to compare the average stress levels on a scale of one to ten in male and female patients at risk and not at risk for a heart attack. By separating the patients into these two categories, we are able to consider whether or not stress level plays an important role in leading to a heart attack within patients.
@@ -126,20 +95,46 @@ heart_attack_pred_data  %>%
 
 ## Conclusions for Stress Level vs. Sex in Patients At Risk and Not at Risk for Heart Attack
 
-#### These visualizations allow us to compare the average stress levels between male and female patients at risk for a heart attack and those not at risk. Through the data that we obtained, it is clear to see that all female patients, no matter their risk for a heart attack, have an average stress level of six and all male patients have an average stress level of five. This observation underscores the importance of considering gender differences in stress levels when assessing the risk of heart attack. Therefore, stress level is prominent within patients and continues to be a main factor for heart attacks in patients.
+#### Through the data that we obtained, it is clear to see that all female patients, no matter their risk for a heart attack, have an average stress level of six and all male patients have an average stress level of five. Therefore, stress level is not a main factor in heart attacks in patients.
+
+
+# Average Risk for Heart Attack by Age and Sex
+
+#### add description about what the data is going to show and why we made this graph
+
+```{r average heart attack risk by age and sex}
+hr <- heart_attack_pred_data %>%
+  group_by(Age, Sex) %>%
+  summarise(avg_heart_attack_risk = mean(Heart.Attack.Risk))
+
+ggplot(hr, aes(x = Age, y = avg_heart_attack_risk, fill = Sex)) +
+  geom_bar(stat = "identity", position = position_dodge(width = 0.8), linewidth = 1.2) + # Adjust position and add color and size
+  labs(x = "Age", y = "Average Heart Attack Risk", title = "Average Heart Attack Risk by Age and Sex") +
+  scale_fill_manual(values = c("maroon", "#4169e1")) + 
+  scale_x_continuous(breaks = seq(20, 90, by = 5)) +  # Add more breaks at intervals of 5
+  theme(
+    text = element_text(size = 14),  # Increase font size for all text
+    panel.grid.minor.x = element_blank()  # Remove minor vertical grid lines
+  )
+```
+
+## Average Risk for Heart Attack by Age and Sex Visualisation Description
+
+#### describe what the visualisation shows
+
+## Conclusions for Average Risk for Heart Attack by Age and Sex
+
+#### what does this mean and how does it relate to our research question
 
 
 
-## Sleep Hours Per Day for Patients At Risk and Not at Risk for Heart Attack
-
-#### why are we creating this graph?
-
+## Income for Patients At Risk Heart Attack
 ```{r income levels in patients not at risk for heart attack}
 heart_attack_pred_data1 <- heart_attack_pred_data  %>% 
   select(Sleep.Hours.Per.Day, Income, Heart.Attack.Risk) %>% 
-  filter(Heart.Attack.Risk != 0) #filters out records where Heart.Attack.Risk is not equal to 0
-
-categorize_income <- function(incomes) { #function to categorizing income into different income brackets
+  filter(Heart.Attack.Risk != 0)
+         
+categorize_income <- function(incomes) {
   if (incomes <= 50000) {
     return("$0 - $50,000")
   } else if (incomes > 50001 & incomes <= 100000) {
@@ -155,32 +150,33 @@ categorize_income <- function(incomes) { #function to categorizing income into d
   }
 }
 
-heart_attack_pred_data1$Income_Category <- sapply(heart_attack_pred_data1$Income, categorize_income) #applies the categorize_income function to create a new column Income_Category
+heart_attack_pred_data1$Income_Category <- sapply(heart_attack_pred_data1$Income, categorize_income)
 
 ggplot(heart_attack_pred_data1, aes(x = "", fill = Income_Category)) +
   geom_bar(stat = "count", width = 1) +
-  coord_polar("y") +  # Coordinates are polar
-  labs(title = "Income of Patients At Risk",  # create a title for the plot
-       fill = "Income Category") +  # Legend title
-  theme_minimal() +  # choose a theme
-  theme(legend.position = "right")  # Position of legend
+  coord_polar("y") +
+  labs(title = "Income of Patients At Risk",
+       fill = "Income Category") +
+  theme_minimal() +
+  theme(legend.position = "right")
 
 ```
+## Income for Patients At Risk Heart Attack Visual Description
 
-## Sleep Hours Per Day for Patients At Risk and Not at Risk for Heart Attack Visualisation Description
+#### This visual is showing the individuals who are at risk for a heart attack and their incomes. As we can see their incomes vary, meaning that income will not be a direct cause for a heart attack, but it can be seen as a stressor, telling us that if one struggles financially it can put added stress on their life and may increase their chances of having a heart attack. 
 
-####  describe what the visualisation shows
+## Conclusions for Income for Patients At Risk Heart Attack
 
-## Conclusions for Sleep Hours Per Day for Patients At Risk and Not at Risk for Heart Attack
+#### This relates to our research question because we were looking at how different stressors impact a patients chance of getting a heart attack. This visual is only showing those at risk for a heart attack and their incomes so there is no definite information to be drawn here, but since incomes vary it can tell us that income is not the most prominant stressor for a heart attack. There is a varitey in income showing us that those who make $250000 can be just as at risk as those making $0-$50000.
 
-#### what does this mean and how does it relate to our research question
+
 
 
 
 
 # Exercise Hours Per Week V. Stress Level Frequency Table
 
-#### Our intention with creating this table was to see if people who are stressed exercise more in order to get rid of this stress.
+#### add description about what the table is going to show and why we made this table
 
 ```{r physical activty v. BMI}
 SummaryTableofExerciseHoursPerWeek <- heart_attack_pred_data %>%
@@ -210,8 +206,17 @@ SummaryTableofExerciseHoursPerWeek %>%
 
 ## Exercise Hours Per Week V. Stress Level Frequency Table Visualisation Description
 
-####  This visual shows the minimum, median, maximum, quintiles, mean, and standard deviation of exercise hours per week for each stress level group (scale 1-10). From looking at the table the mean value for each stress level group is around 10 exercise hours per week, indicating to us that how stressed a person is does not necessarily tell us how much they exercise. Interestingly enough the stress level group with the most mean exercise hours per week, 10.113656, was stress level 5. From the table we are also told the lowest minimum value for exercise hours per week is 0.0024423 which is from stress level group 4. The highest maximum value for exercise hours per week is 19.99871 coming from stress level group 8. This information tells us that just because someone is stressed does not mean they exercise more/less as each group has around the same mean number of hours, the lowest amount of hours does not come from stress level 1 (least stressed), and the highest amount of hours does not come from group level 10 (most stressed). 
+#### This visual shows the minimum, median, maximum, quintiles, mean, and standard deviation of exercise hours per week for each stress level group (scale 1-10). Our intention with creating this table was to see if people who are stressed more exercise more in order to get rid of this stress. From looking at the table the mean value for each stress level group is around 10 exercise hours per week, indicating to us that how stressed a person is does not necessarily tell us how much they exercise. Interestingly enough the stress level group with the most mean exercise hours per week, 10.113656, was stress level 5. From the table we are also told the lowest minimum value for exercise hours per week is 0.0024423 which is from stress level group 4. The highest maximum value for exercise hours per week is 19.99871 coming from stress level group 8. This information tells us that just because someone is stressed does not mean they exercise more/less as each group has around the same mean number of hours, the lowest amount of hours does not come from stress level 1 (least stressed), and the highest amount of hours does not come from group level 10 (most stressed. 
 
 ## Conclusions for Exercise Hours Per Week V. Stress Level Frequency Table
 
 #### Relating this back to our research question stress is a risk factor for having a heart attack and exercise is a way to combat stress. From our table we see that all the stress level groups have a similar mean number of exercise per week, around 10 hours, meaning there are some people in all of the groups who are exercising less than 10 hours. It may be a good suggestion to tell those with higher streess levels to make sure they are exercising, in order to reduce their stress and therefore hopefully reduce their risk of a heart attack. There are a lot of risk factors for a heart attack but if one is able to reduce their stress levels through exercise it will have many benefits such as a healthier heart and lifestyle. 
+
+
+
+
+
+
+
+
+
